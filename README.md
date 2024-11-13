@@ -1,4 +1,4 @@
-## A bot for running Nodepay on Android devices without browser or extension.
+## A bot for running Nodepay on android devices without browser or extension.
 
 ---
 
