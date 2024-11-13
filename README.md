@@ -48,7 +48,7 @@ npm install
 
 - Type the following command to get your token:
   ```bash
-  localStorage.getItem('np_webapp_token') 
+  localStorage.getItem('np_webapp_token')
   ```
 
 - This will return the Bearer token. ex: eyJhbGciOi.......
