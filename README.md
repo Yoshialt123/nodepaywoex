@@ -11,20 +11,24 @@
 
 ## Configuration for Termux
 
-Install nodejs-lts in Termux
+**Install nodejs-lts in Termux**
 ```
 pkg update && pkg upgrade -y
 ```
 ```
 pkg install nodejs-lts
 ```
-1. Clone the repository:
+**Clone the repository:**
 
 ```bash
-git clone https://github.com/ashtrobe/nodepaywoex.git && cd nodepaywoex
+git clone https://github.com/ashtrobe/nodepaywoex.git
+```
+**Change directory:**
+```
+cd nodepaywoex
 ```
 
-3. Install the dependencies:
+**Install the dependencies:**
 
 ```bash
 npm install
@@ -48,7 +52,8 @@ npm install
   ```
 
 - This will return the Bearer token. ex: eyJhbGciOi.......
-3. **Paste the token in `token.txt`**:
+
+**Paste the token in `token.txt`**:
 
 ```text
 ey...
@@ -57,7 +62,7 @@ ey...
 ```
 ## Running the Bot
 
-To start the bot, run the following command:
+**To start the bot, run the following command:**
 
 ```bash
 npm start
