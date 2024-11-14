@@ -18,6 +18,12 @@ pkg update && pkg upgrade -y
 ```
 pkg install nodejs-lts
 ```
+**Install git and nano**
+```
+pkg install git
+pkg install nano
+```
+
 **Clone the repository:**
 
 ```bash
