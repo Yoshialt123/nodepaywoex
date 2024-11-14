@@ -60,6 +60,9 @@ npm install
 - This will return the Bearer token. ex: eyJhbGciOi.......
 
 **Paste the token in `token.txt`**:
+```
+nano token.txt
+```
 
 ```text
 ey...
