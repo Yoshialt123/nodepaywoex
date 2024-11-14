@@ -63,12 +63,6 @@ npm install
 ```
 nano token.txt
 ```
-
-```text
-ey...
-ey...
-ey...
-```
 ## Running the Bot
 
 **To start the bot, run the following command:**
