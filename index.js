@@ -49,16 +49,12 @@ async function main() {
     process.exit(0);
   });
 
-  // Auto-restart function with a countdown timer
+  // Auto-restart function with a hidden countdown timer
   function autoRestart() {
     let remainingTime = COOLDOWN_PERIOD;
 
     // Function to update the remaining time every second
     const interval = setInterval(() => {
-      const minutes = Math.floor(remainingTime / (60 * 1000));
-      const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
-      process.stdout.write(`\r⏳ Auto-restart in: ${minutes}m ${seconds}s`); // Overwrite the line
-
       remainingTime -= 1000; // Decrease by 1 second
 
       if (remainingTime <= 0) {
