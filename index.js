@@ -7,6 +7,7 @@ const { readLines, displayHeader } = require('./src/utils');
 
 const app = express();
 const PORT = 3000; // The port to open for the web server
+const COOLDOWN_PERIOD = 30 * 60 * 1000; // 30 minutes in milliseconds
 
 async function main() {
   displayHeader();
@@ -47,6 +48,33 @@ async function main() {
     console.log(`\n👋 ${'Shutting down...'.green}`);
     process.exit(0);
   });
+
+  // Auto-restart function with a countdown timer
+  function autoRestart() {
+    let remainingTime = COOLDOWN_PERIOD;
+
+    // Function to update the remaining time every second
+    const interval = setInterval(() => {
+      const minutes = Math.floor(remainingTime / (60 * 1000));
+      const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      process.stdout.write(`⏳ Auto-restart in: ${minutes}m ${seconds}s`);
+
+      remainingTime -= 1000; // Decrease by 1 second
+
+      if (remainingTime <= 0) {
+        clearInterval(interval); // Stop the countdown when time is up
+        console.log('\n🔄 Auto-restart triggered after 30 minutes cooldown.'.yellow);
+        console.log('⏳ Restarting bot and server...');
+        main().catch((error) => console.log(`❌ ${error.message}`.red));
+      }
+    }, 1000); // Update every second
+  }
+
+  // Trigger auto-restart with a countdown
+  autoRestart();
 }
 
+// Run the main function initially
 main().catch((error) => console.log(`❌ ${error.message}`.red));
