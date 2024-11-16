@@ -57,9 +57,7 @@ async function main() {
     const interval = setInterval(() => {
       const minutes = Math.floor(remainingTime / (60 * 1000));
       const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
-      process.stdout.clearLine();
-      process.stdout.cursorTo(0);
-      process.stdout.write(`⏳ Auto-restart in: ${minutes}m ${seconds}s`);
+      process.stdout.write(`\r⏳ Auto-restart in: ${minutes}m ${seconds}s`); // Overwrite the line
 
       remainingTime -= 1000; // Decrease by 1 second
 
