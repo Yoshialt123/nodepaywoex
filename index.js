@@ -6,7 +6,8 @@ const initLogger = require('./src/logger');
 const { readLines, displayHeader } = require('./src/utils');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Use the PORT environment variable or default to 3000
+const PORT = process.env.PORT || 3000; // Use Render's PORT environment variable or default to 3000
+const COOLDOWN_PERIOD = 30 * 60 * 1000; // 30 minutes in milliseconds
 
 async function main() {
   displayHeader();
@@ -37,7 +38,7 @@ async function main() {
     res.send('<h1>Service Running</h1><p>This service is operational but does not expect traffic.</p>');
   });
 
-  // Start the HTTP server to satisfy Render's requirement
+  // Start the HTTP server
   app.listen(PORT, () => {
     console.log(`🌐 Dummy server running on port ${PORT}`.green);
   });
@@ -47,6 +48,26 @@ async function main() {
     console.log(`\n👋 ${'Shutting down...'.green}`);
     process.exit(0);
   });
+
+  // Auto-restart function
+  function autoRestart() {
+    let remainingTime = COOLDOWN_PERIOD;
+
+    // Countdown without printing the timer
+    const interval = setInterval(() => {
+      remainingTime -= 1000; // Decrease by 1 second
+
+      if (remainingTime <= 0) {
+        clearInterval(interval); // Stop the countdown when time is up
+        console.log('\n🔄 Auto-restart triggered after 30 minutes cooldown.'.yellow);
+        console.log('⏳ Restarting bot and server...');
+        main().catch((error) => console.log(`❌ ${error.message}`.red));
+      }
+    }, 1000); // Update every second
+  }
+
+  // Trigger auto-restart
+  autoRestart();
 }
 
 // Run the main function initially
